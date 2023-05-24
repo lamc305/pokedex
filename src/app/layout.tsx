@@ -1,9 +1,7 @@
+import { Metadata } from 'next'
 import './globals.css'
-import { Inter } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Pokedex',
 	description: 'App created for learn to use the new version of NextJS',
 }
@@ -15,7 +13,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className={inter.className}>{children}</body>
+			<body>{children}</body>
 		</html>
 	)
 }
