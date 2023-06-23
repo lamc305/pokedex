@@ -21,12 +21,12 @@ export default function DetailPokemonView({ params }: Params) {
 	const data = use(getSinglePokemon(params.name))
 	return (
 		<main
-			className='w-full min-h-screen p-1 relative'
+			className='w-full min-h-screen p-1'
 			style={{
 				backgroundColor: colorsByType[data.types[0].type.name],
 			}}
 		>
-			<nav className='h-[220px]'>
+			<nav className='h-[220px] max-w-2xl relative mx-auto'>
 				<div className='flex items-center justify-between px-5 h-[76px] text-white z-10 relative'>
 					<div className='flex items-center  gap-2'>
 						<Link href={'/'}>
@@ -42,7 +42,7 @@ export default function DetailPokemonView({ params }: Params) {
 				</div>
 				<PokeBall className='absolute top-2 right-2 ml-auto w-[208px] h-[208px] opacity-10 text-white' />
 			</nav>
-			<section className='min-h-[412px] p-[20px] bg-white rounded-lg relative'>
+			<section className='min-h-[412px] p-[20px] max-w-2xl mx-auto bg-white rounded-lg relative'>
 				<Image
 					src={
 						data.sprites.other?.dream_world.front_default
