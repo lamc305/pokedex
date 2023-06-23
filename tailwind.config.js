@@ -55,6 +55,7 @@ module.exports = {
 				'body-1': ['14px', '16px'],
 				'body-2': ['12px', '16px'],
 				'body-3': ['10px', '16px'],
+				caption: ['8px', '12px'],
 			},
 			boxShadow: {
 				'drop-2-dp': '0px 1px 3px 1px rgba(0, 0, 0, 0.2)',

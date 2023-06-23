@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import './globals.css'
+import { PoppinsFont } from '@/styles/fonts'
 
 export const metadata: Metadata = {
 	title: 'Pokedex',
@@ -13,7 +14,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body>{children}</body>
+			<body className={PoppinsFont.className}>{children}</body>
 		</html>
 	)
 }
