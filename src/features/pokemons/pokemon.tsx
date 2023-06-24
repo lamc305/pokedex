@@ -1,10 +1,16 @@
 import { getPokemons } from '@/api'
 import { CardPokemon } from '@/components/card'
+import Link from 'next/link'
 import React, { use } from 'react'
 
-export default function Pokemons() {
-	const pokemons = use(getPokemons(0))
+export interface Params {
+	params: {
+		page: string
+	}
+}
 
+export default function Pokemons({ params }: Params) {
+	let pokemons = use(getPokemons(params.page ? +params.page : 0))
 	return (
 		<>
 			<div
@@ -18,14 +24,20 @@ export default function Pokemons() {
 			{pokemons && (
 				<div className='flex items-center justify-center gap-3 mt-10'>
 					{pokemons.previous && (
-						<span className='bg-red-700 text-white flex items-center justify-center text-sm w-20 rounded-full h-8'>
+						<Link
+							href={`/?page=${+params.page - 1}`}
+							className='bg-red-700 text-white flex items-center justify-center text-sm w-20 rounded-full h-8'
+						>
 							Prev
-						</span>
+						</Link>
 					)}
 					{pokemons.next && (
-						<span className='bg-red-700 text-white flex items-center justify-center text-sm w-20 rounded-full h-8'>
+						<Link
+							href={`/?page=${params.page ? +params.page + 1 : 1}`}
+							className='bg-red-700 text-white flex items-center justify-center text-sm w-20 rounded-full h-8'
+						>
 							Next
-						</span>
+						</Link>
 					)}
 				</div>
 			)}
