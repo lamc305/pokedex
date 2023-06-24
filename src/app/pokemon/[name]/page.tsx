@@ -1,14 +1,15 @@
 import { getSinglePokemon } from '@/api'
-import ArrowBlack from '@/components/icons/ArrowBlack'
 import ChevronLeft from '@/components/icons/ChevronLeft'
 import ChevronRigth from '@/components/icons/ChevronRight'
 import PokeBall from '@/components/icons/Pokeball'
 import Straighten from '@/components/icons/Straighten'
 import Weight from '@/components/icons/Weight'
 import { RenderIf } from '@/components/renderif'
+import Return from '@/components/return'
+import { SinglePokemon } from '@/model/SinglePokemon'
 import { colorsByType } from '@/utils/getColorByType'
 import { getFirstUpperCase } from '@/utils/getFirstUpperCase'
-import { spawn } from 'child_process'
+import { getStats } from '@/utils/getStats'
 import Image from 'next/image'
 import Link from 'next/link'
 import { use } from 'react'
@@ -18,20 +19,18 @@ interface Params {
 	}
 }
 export default function DetailPokemonView({ params }: Params) {
-	const data = use(getSinglePokemon(params.name))
+	const data: SinglePokemon = use(getSinglePokemon(params.name))
 	return (
 		<main
-			className='w-full min-h-screen p-1 relative'
+			className='w-full min-h-screen p-1'
 			style={{
 				backgroundColor: colorsByType[data.types[0].type.name],
 			}}
 		>
-			<nav className='h-[220px]'>
+			<nav className='h-[220px] max-w-2xl relative mx-auto'>
 				<div className='flex items-center justify-between px-5 h-[76px] text-white z-10 relative'>
 					<div className='flex items-center  gap-2'>
-						<Link href={'/'}>
-							<ArrowBlack className='w-8 h-8' />
-						</Link>
+						<Return />
 						<h1 className='text-header-headline font-bold'>
 							{getFirstUpperCase(data.name)}
 						</h1>
@@ -42,7 +41,7 @@ export default function DetailPokemonView({ params }: Params) {
 				</div>
 				<PokeBall className='absolute top-2 right-2 ml-auto w-[208px] h-[208px] opacity-10 text-white' />
 			</nav>
-			<section className='min-h-[412px] p-[20px] bg-white rounded-lg relative'>
+			<section className='min-h-[330px] p-[20px] max-w-2xl mx-auto bg-white rounded-lg relative'>
 				<Image
 					src={
 						data.sprites.other?.dream_world.front_default
@@ -50,7 +49,7 @@ export default function DetailPokemonView({ params }: Params) {
 							: data.sprites.front_default
 					}
 					alt={`Picture of ${data.name}`}
-					className='w-[200px] h-[200px] absolute right-0 left-0 mx-auto -top-40'
+					className='w-[200px] h-[200px] absolute right-0 left-0 mx-auto -top-40 hover:scale-125 transition-all duration-200'
 					width={200}
 					height={200}
 				/>
@@ -118,6 +117,48 @@ export default function DetailPokemonView({ params }: Params) {
 							Base Experience
 						</p>
 					</div>
+				</div>
+				<h2
+					className='text-center font-bold text-header-subtitle-1 mt-4'
+					style={{ color: colorsByType[data.types[0].type.name] }}
+				>
+					Base Stats
+				</h2>
+				<div className='max-w-[302px] mx-auto'>
+					{data.stats.map((val) => (
+						<div key={val.stat.name} className='h-4 flex items-center gap-2'>
+							<div>
+								<p
+									className='text-header-subtitle-3 w-[27px] text-right pr-1'
+									style={{ color: colorsByType[data.types[0].type.name] }}
+								>
+									{getStats[val.stat.name as string]}
+								</p>
+							</div>
+							<div className='w-[1px] h-4 bg-grayscale-light text-transparent'>
+								i
+							</div>
+							<div className='w-[23px]'>
+								<p className='text-body-3 text-right'>
+									{val.base_stat.toString().padStart(3, '0')}
+								</p>
+							</div>
+							<div
+								className='rounded-[4px] min-w-[233px] h-1 w-full opacity-30 ml-2 overflow-hidden'
+								style={{
+									backgroundColor: colorsByType[data.types[0].type.name],
+								}}
+							>
+								<div
+									className='opacity-100 min-w-[233px] h-1'
+									style={{
+										backgroundColor: colorsByType[data.types[0].type.name],
+										width: '30%',
+									}}
+								></div>
+							</div>
+						</div>
+					))}
 				</div>
 			</section>
 		</main>

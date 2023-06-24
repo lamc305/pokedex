@@ -16,7 +16,7 @@ export interface Result {
 }
 
 export async function getPokemons(number: number): Promise<Pokemon> {
-	const { data } = await http.get(`/pokemon?offset=${number}&limit=20`)
+	const { data } = await http.get(`/pokemon?offset=${number * 20}&limit=20`)
 	return data
 }
 
