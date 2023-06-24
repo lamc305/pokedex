@@ -23,22 +23,22 @@ export function CardPokemon({ name, url }: Props) {
 				<span className='self-end text-grayscale-medium text-[8px] leading-3'>
 					{'#' + data.id?.toString().padStart(3, '0')}
 				</span>
-				{(data?.sprites?.other?.dream_world.front_default ||
-					data.sprites.front_default) && (
-					<Image
-						src={
-							data.sprites.other?.dream_world.front_default
-								? data.sprites.other?.dream_world.front_default
-								: data.sprites.front_default
-						}
-						alt={name}
-						width={72}
-						height={72}
-						className='relative z-10 object-contain w-[72px] h-[72px]'
-					/>
-				)}
+				<Image
+					src={
+						data.sprites.other?.dream_world.front_default
+							? data.sprites.other?.dream_world.front_default
+							: data.sprites.front_default || '/question.png'
+					}
+					alt={name}
+					width={72}
+					height={72}
+					className='relative z-10 object-contain w-[72px] h-[72px]'
+					priority={false}
+					loading='lazy'
+				/>
 				<span className='text-body-3 realtive z-10'>
-					{getFirstUpperCase(data.name)}
+					{getFirstUpperCase(data.name.slice(0, 10))}
+					{data.name !== data.name.slice(0, 10) && '...'}
 				</span>
 				<div className='absolute bottom-0 h-11 rounded-[7px] left-0 right-0 bg-grayscale-background'></div>
 			</div>

@@ -46,19 +46,20 @@ export default function DetailPokemonView({ params }: Params) {
 					src={
 						data.sprites.other?.dream_world.front_default
 							? data.sprites.other?.dream_world.front_default
-							: data.sprites.front_default
+							: data.sprites.front_default || '/question.png'
 					}
 					alt={`Picture of ${data.name}`}
-					className='w-[200px] h-[200px] absolute right-0 left-0 mx-auto -top-40 hover:scale-125 transition-all duration-200'
+					className='w-[200px] h-[200px] absolute right-0 left-0 mx-auto -top-40 hover:scale-110 transition-all duration-200'
 					width={200}
 					height={200}
+					priority={true}
 				/>
 				<RenderIf condition={data.id > 1}>
 					<Link href={`/pokemon/${data.id - 1}`}>
 						<ChevronLeft className='w-9 h-9 text-white absolute left-5 -top-20' />
 					</Link>
 				</RenderIf>
-				<RenderIf condition={data.id < 1010}>
+				<RenderIf condition={data.id < 10271}>
 					<Link href={`/pokemon/${data.id + 1}`}>
 						<ChevronRigth className='w-9 h-9 text-white absolute right-5 -top-20' />
 					</Link>
@@ -124,7 +125,7 @@ export default function DetailPokemonView({ params }: Params) {
 				>
 					Base Stats
 				</h2>
-				<div className='max-w-[302px] mx-auto'>
+				<div className='max-w-[302px] mx-auto mt-4'>
 					{data.stats.map((val) => (
 						<div key={val.stat.name} className='h-4 flex items-center gap-2'>
 							<div>
@@ -139,21 +140,21 @@ export default function DetailPokemonView({ params }: Params) {
 								i
 							</div>
 							<div className='w-[23px]'>
-								<p className='text-body-3 text-right'>
+								<p className='text-body-3 text-right w-[19px]'>
 									{val.base_stat.toString().padStart(3, '0')}
 								</p>
 							</div>
 							<div
-								className='rounded-[4px] min-w-[233px] h-1 w-full opacity-30 ml-2 overflow-hidden'
+								className='rounded-[4px] h-1 ml-2 w-full overflow-hidden relative'
 								style={{
-									backgroundColor: colorsByType[data.types[0].type.name],
+									backgroundColor: colorsByType[data.types[0].type.name] + '33',
 								}}
 							>
 								<div
-									className='opacity-100 min-w-[233px] h-1'
+									className='h-1 absolute z-10'
 									style={{
 										backgroundColor: colorsByType[data.types[0].type.name],
-										width: '30%',
+										width: val.base_stat,
 									}}
 								></div>
 							</div>
