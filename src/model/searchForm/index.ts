@@ -24,6 +24,7 @@ export const schemaValidationSearch = yup
 					.required('This field is required')
 					.nullable()
 					.max(1010, 'The number must be less than or equal to 1010')
+					.positive('The number must be a positive number')
 			})
 		}),
 	})
