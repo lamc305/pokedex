@@ -4,6 +4,7 @@ import ChevronRigth from '@/components/icons/ChevronRight'
 import PokeBall from '@/components/icons/Pokeball'
 import Straighten from '@/components/icons/Straighten'
 import Weight from '@/components/icons/Weight'
+import KeyPress from '@/components/key-press'
 import { RenderIf } from '@/components/renderif'
 import Return from '@/components/return'
 import { SinglePokemon } from '@/model/SinglePokemon'
@@ -11,7 +12,6 @@ import { colorsByType } from '@/utils/getColorByType'
 import { getFirstUpperCase } from '@/utils/getFirstUpperCase'
 import { getStats } from '@/utils/getStats'
 import Image from 'next/image'
-import Link from 'next/link'
 import { use } from 'react'
 interface Params {
 	params: {
@@ -55,14 +55,14 @@ export default function DetailPokemonView({ params }: Params) {
 					priority={true}
 				/>
 				<RenderIf condition={data.id > 1}>
-					<Link href={`/pokemon/${data.id - 1}`}>
+					<KeyPress id={data.id}>
 						<ChevronLeft className='w-9 h-9 text-white absolute left-5 -top-20' />
-					</Link>
+					</KeyPress>
 				</RenderIf>
-				<RenderIf condition={data.id < 10271}>
-					<Link href={`/pokemon/${data.id + 1}`}>
+				<RenderIf condition={data.id < 1010}>
+					<KeyPress id={data.id} next>
 						<ChevronRigth className='w-9 h-9 text-white absolute right-5 -top-20' />
-					</Link>
+					</KeyPress>
 				</RenderIf>
 				<div className='flex items-center justify-center gap-4 mt-10'>
 					{data.types.map((res) => (
@@ -104,7 +104,7 @@ export default function DetailPokemonView({ params }: Params) {
 						<div className='h-8'>
 							{data.abilities.slice(0, 2).map((res) => (
 								<p
-									key={res.ability.name}
+									key={res.ability.name + `${Math.random()}`}
 									className='text-center text-grayscale-dark text-body-3'
 								>
 									{res.ability.name

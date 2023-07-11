@@ -1,11 +1,21 @@
-import Navbar from '@/features/navbar/navbar'
-import { PokemonList } from '@/features/pokemons'
+import Navbar from '@/modules/navbar/navbar'
+import { ContentPokemon } from '@/modules/pokemons'
+import Pokemons from '@/modules/pokemons/pokemon'
 
-function Home({ searchParams }: any) {
+function Home({
+	searchParams,
+}: {
+	searchParams: {
+		page: string
+	}
+}) {
+	const { page } = searchParams
 	return (
-		<main className='bg-identity-primary w-full p-1 pb-[2.3rem] '>
+		<main className='bg-identity-primary w-full p-1 pb-[2.3rem]'>
 			<Navbar />
-			<PokemonList params={searchParams} />
+			<ContentPokemon>
+				<Pokemons page={page} />
+			</ContentPokemon>
 		</main>
 	)
 }

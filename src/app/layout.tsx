@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import './globals.css'
 import { PoppinsFont } from '@/styles/fonts'
+import { SearchProvider } from '@/context/search'
 
 export const metadata: Metadata = {
 	title: 'Pokedex',
@@ -13,8 +14,10 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang='en'>
-			<body className={PoppinsFont.className}>{children}</body>
-		</html>
+		<SearchProvider>
+			<html lang='en'>
+				<body className={PoppinsFont.className}>{children}</body>
+			</html>
+		</SearchProvider>
 	)
 }
