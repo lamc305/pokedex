@@ -11,7 +11,7 @@ function Home({
 }) {
 	const { page } = searchParams
 	return (
-		<main className='bg-identity-primary w-full p-1 pb-[2.3rem]'>
+		<main className='bg-identity-primary w-full p-1 pb-[2.3rem] min-h-screen'>
 			<Navbar />
 			<ContentPokemon>
 				<Pokemons page={page} />
