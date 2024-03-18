@@ -13,6 +13,7 @@ import { getFirstUpperCase } from '@/utils/getFirstUpperCase'
 import { getStats } from '@/utils/getStats'
 import Image from 'next/image'
 import { use } from 'react'
+
 interface Params {
 	params: {
 		name: string

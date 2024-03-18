@@ -1,25 +1,23 @@
-import * as yup from 'yup'
+import { lazy, number, object, string } from 'yup'
 
 export interface FormSearchValues {
 	option: string
 	search: string | number | null
 }
 
-let option: string
-export const schemaValidationSearch = yup
-	.object()
-	.shape({
-		option: yup.lazy((val) => {
+export const schemaValidationSearch = () => {
+	let option: string
+	return object({
+		option: lazy((val) => {
 			option = val
-			return yup.string().required()
+			return string().required()
 		}),
-		search: yup.lazy(() => {
-			return yup.lazy(() => {
+		search: lazy(() => {
+			return lazy(() => {
 				if (option === 'name') {
-					return yup.string().required('This field is required')
+					return string().required('This field is required')
 				}
-				return yup
-					.number()
+				return number()
 					.transform((val) => (Number.isNaN(val) ? null : val))
 					.required('This field is required')
 					.nullable()
@@ -27,5 +25,5 @@ export const schemaValidationSearch = yup
 					.positive('The number must be a positive number')
 			})
 		}),
-	})
-	.required()
+	}).required()
+}

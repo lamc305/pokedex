@@ -19,7 +19,7 @@ export default function SearchPokemon() {
 			search: formValues.search || '',
 			option: formValues.option || 'name',
 		},
-		resolver: yupResolver(schemaValidationSearch),
+		resolver: yupResolver(schemaValidationSearch()),
 	})
 
 	const {
@@ -67,7 +67,6 @@ export default function SearchPokemon() {
 						className='outline-none w-full h-4 text-body-3'
 						type={watch('option') === 'name' ? 'text' : 'number'}
 						placeholder='Search'
-						// max={watch('option') === 'number' ? '1010' : ''}
 						id='search'
 						{...register('search')}
 					/>
