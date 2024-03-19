@@ -19,7 +19,7 @@ export default function SearchPokemon() {
 			search: formValues.search || '',
 			option: formValues.option || 'name',
 		},
-		resolver: yupResolver(schemaValidationSearch()),
+		resolver: yupResolver(schemaValidationSearch),
 	})
 
 	const {
@@ -30,6 +30,8 @@ export default function SearchPokemon() {
 		clearErrors,
 		formState: { errors },
 	} = methods
+
+	console.log(errors)
 
 	const onSubmit: SubmitHandler<FormSearchValues> = ({ option, search }) => {
 		handleChangeFormValues(search, option)
